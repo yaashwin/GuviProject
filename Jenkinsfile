@@ -30,14 +30,14 @@ pipeline {
             }
         }
 
-        stage('Stop and Remove Existing Container') {
-            steps {
-                sh '''
-                docker stop guvi-container || true
-                docker rm guvi-container || true
-                '''
-            }
-        }
+        // stage('Stop and Remove Existing Container') {
+        //     steps {
+        //         sh '''
+        //         docker stop guvi-container || true
+        //         docker rm guvi-container || true
+        //         '''
+        //     }
+        // }
 
         stage('Run New Docker Container') {
             steps {
