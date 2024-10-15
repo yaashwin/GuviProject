@@ -5,10 +5,14 @@ pipeline {
         maven 'Maven 3.8.1'  // Ensure Maven is installed in Jenkins
     }
 
+    environment {
+        DOCKER_IMAGE = "guvi-project:${env.BUILD_ID}"
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/yourusername/your-repo.git'
+                git branch: 'main', url: 'https://github.com/yaashwin/GuviProject.git'
             }
         }
 
@@ -21,7 +25,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("guvi-project:${env.BUILD_ID}")
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
@@ -29,7 +33,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.run("-d -p 8081:8080 guvi-project:${env.BUILD_ID}")
+                    docker.run("-d -p 8081:8080 ${DOCKER_IMAGE}")
                 }
             }
         }
@@ -37,10 +41,11 @@ pipeline {
 
     post {
         success {
-            echo 'Deployment Successful!'
+            echo 'Build and deployment completed successfully!'
         }
         failure {
-            echo 'Deployment Failed!'
+            echo 'Build or deployment failed!'
         }
     }
 }
+
