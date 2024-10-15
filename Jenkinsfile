@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = "guvi-project:${env.BUILD_ID}"
+        DOCKER_IMAGE = "guvi-project:latest"
     }
 
     stages {
