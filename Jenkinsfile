@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.8.1'  // Ensure Maven is installed in Jenkins
+        maven 'Maven'  // Ensure Maven is installed in Jenkins
     }
 
     environment {
@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
-                sh './mvnw clean package'
+                sh 'mvn clean package'
             }
         }
 
